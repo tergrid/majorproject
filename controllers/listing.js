@@ -4,11 +4,11 @@ const ExpressError = require("../utils/ExpressError.js");
 
 module.exports.index = async(req,res,next)=>{
     const allListings = await Listing.find({});
-    res.render("listings/index.ejs",{allListings});
+    res.render("listings/index",{allListings});
 };
 
 module.exports.renderNewForm = (req,res,)=>{
-    res.render("listings/new.ejs");
+    res.render("listings/new");
 };
 
 module.exports.showListing = async (req, res, next) => {
@@ -22,7 +22,7 @@ module.exports.showListing = async (req, res, next) => {
         req.flash("error", "Listing you requested for does not exist");
         return res.redirect("/listings");
     }
-    res.render("listings/show.ejs", { listing });
+    res.render("listings/show", { listing });
 };
 
 module.exports.createListing = async(req,res,next)=>{
@@ -52,7 +52,7 @@ module.exports.renderEditForm = async (req,res,next)=>{
     }
     let originalImageUrl = listing.image.url;
     originalImageUrl = originalImageUrl.replace("/upload","upload/w_250")
-    res.render("listings/edit.ejs",{listing, originalImageUrl});
+    res.render("listings/edit",{listing, originalImageUrl});
 };
 
 module.exports.updateListing = async (req, res, next) => {
